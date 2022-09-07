@@ -24,6 +24,8 @@ public class BallAreaTech
 public class GameManager : MonoBehaviour
 {
     [SerializeField ] private  GameObject collector;
+    [SerializeField ] private  GameObject[] Pallets;
+    bool palettesVisible;
     [SerializeField ] private  GameObject ballControlObj;
     [SerializeField] public bool collectorMove;
     [SerializeField] private float collectorSpeed;
@@ -80,6 +82,11 @@ public class GameManager : MonoBehaviour
 
     public void AtBorder()
     {
+        if(palettesVisible)
+        {
+            Pallets[0].SetActive(false);
+            Pallets[1].SetActive(false);
+        }
         collectorMove = false;
 
         Collider[] HitCollider = Physics.OverlapBox(ballControlObj.transform.position, ballControlObj.transform.localScale / 2,Quaternion.identity);
@@ -96,11 +103,12 @@ public class GameManager : MonoBehaviour
 
 
     
-    private void OnDrawGizmos() 
+    /* private void OnDrawGizmos() 
     {
         Gizmos.color = Color.red;
         Gizmos.DrawCube(ballControlObj.transform.position,ballControlObj.transform.localScale);
     }
+    */
 
     public void CountTheBalls()
     {
@@ -127,10 +135,18 @@ public class GameManager : MonoBehaviour
                 Debug.Log(" Oyun Bitti");
                 // P A N E L  Y A P 
             }
+            
             else
             {
                 currentCheckPoint++;
                 ballCollected = 0;
+
+                if(palettesVisible)
+                {
+                    Pallets[0].SetActive(true);
+                    Pallets[1].SetActive(true);
+
+                }
             }
             
         }
@@ -139,6 +155,15 @@ public class GameManager : MonoBehaviour
             Debug.Log("Kaybettin");
             // P A N  E L  Y A P 
         }
+    }
+
+    public void ActivatePalettes()
+    {
+        palettesVisible = true;
+        Pallets[0].SetActive(true);
+        Pallets[1].SetActive(true);
+
+
     }
     
 
