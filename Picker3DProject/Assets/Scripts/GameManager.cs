@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 [Serializable]
 
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField ] private  GameObject collector;
     [SerializeField ] private  GameObject[] Pallets;
+    [SerializeField ] private  GameObject[] bonusBalls;
     bool palettesVisible;
     [SerializeField ] private  GameObject ballControlObj;
     [SerializeField] public bool collectorMove;
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour
     int currentCheckPoint;
 
     [SerializeField] private List<BallAreaTech> _BallAreaTech = new List<BallAreaTech>();
+    
+    [SerializeField] private GameObject _Canvas;
     
     
     // Start is called before the first frame update
@@ -133,7 +137,10 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 0;
                 Debug.Log(" Oyun Bitti");
-                // P A N E L  Y A P 
+                _Canvas.SetActive(true);
+                
+
+                
             }
             
             else
@@ -163,6 +170,12 @@ public class GameManager : MonoBehaviour
         Pallets[0].SetActive(true);
         Pallets[1].SetActive(true);
 
+
+    }
+
+    public void BonusBalls(int bonusBallIndex)
+    {
+        bonusBalls[bonusBallIndex].SetActive(true);
 
     }
     

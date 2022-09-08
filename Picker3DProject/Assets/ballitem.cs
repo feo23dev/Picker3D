@@ -5,6 +5,8 @@ using UnityEngine;
 public class ballitem : MonoBehaviour
 {
     [SerializeField] private GameManager _GameManager;
+    [SerializeField] private string itemtype;
+    [SerializeField] private int bonusBallIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +17,17 @@ public class ballitem : MonoBehaviour
     {
         if(other.CompareTag("toplayicisinir"))
         {
-            _GameManager.ActivatePalettes();
-            gameObject.SetActive(false);
+            if( itemtype =="Palette" )
+            {
+                _GameManager.ActivatePalettes();
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                _GameManager.BonusBalls(bonusBallIndex);
+                
+            }
+            
         }
         
     }
